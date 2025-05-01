@@ -8,7 +8,7 @@ Created on Thu May  1 11:08:24 2025
 import streamlit as st
 import math
 
-st.image("logo.png", width=150)
+st.image("logo.png", width=50)
 st.title("🔁 DLE Pipe Sizing & Flowrate Calculator")
 st.markdown("""
 ### 💡 What This App Does
@@ -24,9 +24,9 @@ Use the dropdown above to choose your task and get started!
 
 # Select calculation mode
 mode = st.selectbox("Choose calculation mode:", [
-    "Calculate Pipe Diameter (from flowrate)",
-    "Calculate Flowrate (from pipe diameter)",
-    "Calculate Header Size (from flowrate and number of columns)"
+    "1. Calculate Pipe Diameter (from flowrate)",
+    "2. Calculate Flowrate (from pipe diameter)",
+    "3. Calculate Header Size (from flowrate and number of columns)"
 ])
 
 # Column dimensions input
