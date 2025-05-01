@@ -8,7 +8,19 @@ Created on Thu May  1 11:08:24 2025
 import streamlit as st
 import math
 
+st.image("logo.png", width=150)
 st.title("🔁 DLE Pipe Sizing & Flowrate Calculator")
+st.markdown("""
+### 💡 What This App Does
+This tool helps engineers working on Direct Lithium Extraction (DLE) systems calculate:
+- Pipe diameter based on bed volume and flowrate
+- Velocity checks against target values
+- Flowrate based on a selected pipe diameter
+- Header sizing for multiple columns
+
+Use the dropdown above to choose your task and get started!
+""")
+
 
 # Select calculation mode
 mode = st.selectbox("Choose calculation mode:", [
