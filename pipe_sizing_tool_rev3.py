@@ -10,8 +10,8 @@ import math
 
 st.title("🔁 DLE Pipe Sizing & Flowrate Calculator")
 st.markdown("""
-### 💡 What This App Does
-This tool helps engineers working on Direct Lithium Extraction (DLE) systems calculate:
+### 💡 What This Application Does
+For Direct Lithium Extraction (DLE) systems, this tool helps to calculate:
 - Pipe diameter based on bed volume and flowrate
 - Velocity checks against target values
 - Flowrate based on a selected pipe diameter
