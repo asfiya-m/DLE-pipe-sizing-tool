@@ -8,7 +8,6 @@ Created on Thu May  1 11:08:24 2025
 import streamlit as st
 import math
 
-st.image("logo.png", width=100)
 st.title("🔁 DLE Pipe Sizing & Flowrate Calculator")
 st.markdown("""
 ### 💡 What This App Does
