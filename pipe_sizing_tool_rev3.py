@@ -23,9 +23,9 @@ Use the dropdown above to choose your task and get started!
 
 # Select calculation mode
 mode = st.selectbox("Choose calculation mode:", [
-    "1. Calculate Pipe Diameter (from flowrate)",
-    "2. Calculate Flowrate (from pipe diameter)",
-    "3. Calculate Header Size (from flowrate and number of columns)"
+    "Calculate Pipe Diameter (from flowrate)",
+    "Calculate Flowrate (from pipe diameter)",
+    "Calculate Header Size (from flowrate and number of columns)"
 ])
 
 # Column dimensions input
