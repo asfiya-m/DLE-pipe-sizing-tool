@@ -50,28 +50,28 @@ if mode == "Calculate Pipe Diameter (from flowrate)":
     st.header("2. Flowrate Input (in BV/hr)")
     pipe_flowrate_bvhr = st.number_input("Enter flowrate through pipe (BV/hr):", min_value=0.01)
     
-    # Convert BV/hr → L/hr → GPM
+    # Convert BV/hr → L/hr → gpm
     pipe_flow_Lhr = pipe_flowrate_bvhr * bed_volume_L
     pipe_flow_gpm = pipe_flow_Lhr / (3.785*60)
-    st.write(f"💧 Flowrate: {pipe_flow_Lhr:.2f} L/hr | {pipe_flow_gpm:.2f} gpm")
+    st.write(f" Flowrate: {pipe_flow_Lhr:.2f} L/hr | {pipe_flow_gpm:.2f} gpm")
     
     # Step 3: Diameter using rule of thumb
     diameter_in = math.sqrt(pipe_flow_gpm / 20)
-    st.write(f"📏 Calculated Pipe Diameter: {diameter_in:.2f} in")
+    st.write(f" Calculated Pipe Diameter: {diameter_in:.2f} in")
     
     # Step 4: Calculate velocity
     diameter_m = diameter_in * 0.0254
     pipe_area_m2 = math.pi * (diameter_m ** 2) / 4
     pipe_flow_m3_s = pipe_flow_Lhr / (1000 * 3600)
     velocity_m_s = pipe_flow_m3_s / pipe_area_m2
-    st.write(f"🏃 Velocity: {velocity_m_s:.2f} m/s")
+    st.write(f" Velocity: {velocity_m_s:.2f} m/s")
     
     # Step 5: Target velocity check
     st.header("3. Target Velocity Check")
     target_velocity = st.number_input("Enter Target Velocity (m/s):", min_value=0.01)
     
     st.header("4. Velocity Check and Suggested Pipe Size")
-    if abs(velocity_m_s - target_velocity) > 0.01:
+    if abs(velocity_m_s - target_velocity) > 0.001:
         # Calculate required diameter
         required_diameter_m = math.sqrt((4 * pipe_flow_m3_s) / (math.pi * target_velocity))
         required_diameter_in = required_diameter_m / 0.0254
@@ -107,8 +107,8 @@ elif mode == "Calculate Flowrate (from pipe diameter)":
     flowrate_L_hr = flowrate_m3_s * 1000 * 3600
     flowrate_bv_hr = flowrate_L_hr / bed_volume_L
 
-    st.write(f"💧 Flowrate: {flowrate_L_hr:.2f} L/hr")
-    st.write(f"📦 Flowrate in BV/hr: **{flowrate_bv_hr:.2f} BV/hr**")
+    st.write(f" Flowrate: {flowrate_L_hr:.2f} L/hr")
+    st.write(f" Flowrate in BV/hr: **{flowrate_bv_hr:.2f} BV/hr**")
 
 elif mode == "Calculate Header Size (from flowrate and number of columns)":
     st.header("2. Header Flowrate Input (in BV/hr)")
@@ -117,23 +117,23 @@ elif mode == "Calculate Header Size (from flowrate and number of columns)":
 
     # Calculate total flowrate
     total_flow_bvhr = number_of_columns * column_flowrate_bvhr
-    st.write(f"📦 Total Flowrate through all columns: **{total_flow_bvhr:.2f} BV/hr**")
+    st.write(f" Total Flowrate through all columns: **{total_flow_bvhr:.2f} BV/hr**")
 
     # Convert total flow to L/hr and GPM
     total_flow_Lhr = total_flow_bvhr * bed_volume_L
     total_flow_gpm = total_flow_Lhr / (3.785 * 60)
-    st.write(f"💧 Total Flowrate: {total_flow_Lhr:.2f} L/hr | {total_flow_gpm:.2f} gpm")
+    st.write(f" Total Flowrate: {total_flow_Lhr:.2f} L/hr | {total_flow_gpm:.2f} gpm")
 
     # Step 3: Header Diameter using rule of thumb
     header_diameter_in = math.sqrt(total_flow_gpm / 20)
-    st.write(f"📏 Calculated Header Diameter: {header_diameter_in:.2f} in")
+    st.write(f" Calculated Header Diameter: {header_diameter_in:.2f} in")
 
     # Step 4: Calculate velocity through header
     header_diameter_m = header_diameter_in * 0.0254
     header_area_m2 = math.pi * (header_diameter_m ** 2) / 4
     header_flow_m3_s = total_flow_Lhr / (1000 * 3600)
     header_velocity_m_s = header_flow_m3_s / header_area_m2
-    st.write(f"🏃 Velocity through Header: {header_velocity_m_s:.2f} m/s")
+    st.write(f" Velocity through Header: {header_velocity_m_s:.2f} m/s")
 
     # Step 5: Target velocity check for header
     st.header("3. Target Velocity Check")
@@ -156,7 +156,7 @@ elif mode == "Calculate Header Size (from flowrate and number of columns)":
             suggested_header_area_m2 = math.pi * (suggested_header_diameter_m ** 2) / 4
             suggested_header_velocity = header_flow_m3_s / suggested_header_area_m2
 
-            st.success(f"🔧 Suggested Standard Header Size: **{suggested_header_size} in**")
+            st.success(f" Suggested Standard Header Size: **{suggested_header_size} in**")
             st.write(f"Velocity at {suggested_header_size} in: **{suggested_header_velocity:.2f} m/s**")
         else:
             st.error("❌ No standard header size found.")
