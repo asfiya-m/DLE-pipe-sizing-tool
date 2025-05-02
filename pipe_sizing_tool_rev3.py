@@ -65,14 +65,14 @@ if mode == "Calculate Pipe Diameter (from flowrate)":
     
     # Step 3: Diameter using rule of thumb
     diameter_in = math.sqrt(pipe_flow_gpm / 20)
-    st.write(f" Result: Calculated Pipe Diameter for the flowrate {pipe_flowrate_bvhr:.2f} BV/hr: {diameter_in:.2f} in")
+    st.write(f" **Result:** Calculated Pipe Diameter for the flowrate {pipe_flowrate_bvhr:.2f} BV/hr: **{diameter_in:.2f} in**")
     
     # Step 4: Calculate velocity
-    diameter_m = diameter_in * 0.0254
-    pipe_area_m2 = math.pi * (diameter_m ** 2) / 4
-    pipe_flow_m3_s = pipe_flow_Lhr / (1000 * 3600)
-    velocity_m_s = pipe_flow_m3_s / pipe_area_m2
-    st.write(f" Velocity of fluid through the pipe of calculated diameter {diameter_in:.2f} in: {velocity_m_s:.2f} m/s")
+    #diameter_m = diameter_in * 0.0254
+    #pipe_area_m2 = math.pi * (diameter_m ** 2) / 4
+    #pipe_flow_m3_s = pipe_flow_Lhr / (1000 * 3600)
+    #velocity_m_s = pipe_flow_m3_s / pipe_area_m2
+    #st.write(f" Velocity of fluid through the pipe of calculated diameter {diameter_in:.2f} in: {velocity_m_s:.2f} m/s")
 
     # Step 5: Ask if user wants to input a target velocity
     target_velocity_input = st.selectbox("Do you have a target velocity to check?", ["No", "Yes"])
