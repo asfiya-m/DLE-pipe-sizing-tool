@@ -67,7 +67,7 @@ if mode == "Calculate Pipe Diameter (from flowrate)":
     st.write(f" **Result:** Calculated Pipe Diameter for the flowrate {pipe_flowrate_bvhr:.2f} BV/hr: **{diameter_in:.2f} in**")
     #Step 3.1: Standard pipe diameter
     adjacent_standard_size = next((size for size in standard_pipe_sizes if size >= diameter_in), None)
-    st.success(f"Standard Pipe diameter: **{adjacent_standard_size} in**")
+    st.write(f"Standard Pipe diameter: **{adjacent_standard_size} in**")
     
     # Step 4: Calculate velocity
     #diameter_m = diameter_in * 0.0254
