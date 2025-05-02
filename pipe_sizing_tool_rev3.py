@@ -28,14 +28,22 @@ mode = st.selectbox("Choose calculation mode:", [
     "Calculate Header Size (from flowrate and number of columns)"
 ])
 
-# Column dimensions input
+# Column dimensions input with unit selection
 st.header("1. Column Dimensions")
-column_diameter_mm = st.number_input("Enter Column Diameter (mm):", min_value=1.0)
-column_height_mm = st.number_input("Enter Column Height (mm):", min_value=1.0)
+unit = st.selectbox("Select Unit for Dimensions:", ["mm", "inches"])
+
+if unit == "mm":
+    column_diameter = st.number_input("Enter Column Diameter (mm):", min_value=1.0)
+    column_height = st.number_input("Enter Column Height (mm):", min_value=1.0)
+    column_diameter_m = column_diameter / 1000
+    column_height_m = column_height / 1000
+else:
+    column_diameter = st.number_input("Enter Column Diameter (in):", min_value=0.1)
+    column_height = st.number_input("Enter Column Height (in):", min_value=0.1)
+    column_diameter_m = column_diameter * 0.0254
+    column_height_m = column_height * 0.0254
 
 # Calculate bed volume
-column_diameter_m = column_diameter_mm / 1000
-column_height_m = column_height_mm / 1000
 bed_volume_m3 = math.pi * (column_diameter_m ** 2) / 4 * column_height_m
 bed_volume_L = bed_volume_m3 * 1000
 st.write(f"🧮 **Bed Volume:** {bed_volume_m3:.3f} m³ ({bed_volume_L:.2f} L)")
