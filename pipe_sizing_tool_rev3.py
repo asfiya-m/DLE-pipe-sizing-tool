@@ -65,42 +65,46 @@ if mode == "Calculate Pipe Diameter (from flowrate)":
     
     # Step 3: Diameter using rule of thumb
     diameter_in = math.sqrt(pipe_flow_gpm / 20)
-    st.write(f" Calculated Pipe Diameter: {diameter_in:.2f} in")
+    st.write(f" Result: Calculated Pipe Diameter for the flowrate {pipe_flowrate_bvhr:.2f} BV/hr: {diameter_in:.2f} in")
     
     # Step 4: Calculate velocity
     diameter_m = diameter_in * 0.0254
     pipe_area_m2 = math.pi * (diameter_m ** 2) / 4
     pipe_flow_m3_s = pipe_flow_Lhr / (1000 * 3600)
     velocity_m_s = pipe_flow_m3_s / pipe_area_m2
-    st.write(f" Velocity: {velocity_m_s:.2f} m/s")
+    st.write(f" Velocity of fluid through the pipe of calculated diameter {diameter_in:.2f} in: {velocity_m_s:.2f} m/s")
+
+    # Step 5: Ask if user wants to input a target velocity
+    target_velocity_input = st.selectbox("Do you have a target velocity to check?", ["No", "Yes"])
     
-    # Step 5: Target velocity check
-    st.header("3. Target Velocity Check")
-    target_velocity = st.number_input("Enter Target Velocity (m/s):", min_value=0.01)
+    if target_velocity_input == "Yes":
+        st.header("3. Target Velocity Check")
+        target_velocity = st.number_input("Enter Target Velocity (m/s):", min_value=0.01)
     
-    st.header("4. Velocity Check and Suggested Pipe Size")
-    if abs(velocity_m_s - target_velocity) > 0.001:
-        # Calculate required diameter
-        required_diameter_m = math.sqrt((4 * pipe_flow_m3_s) / (math.pi * target_velocity))
-        required_diameter_in = required_diameter_m / 0.0254
-
-        # Round up to standard size
-        suggested_size = next((size for size in standard_pipe_sizes if size >= required_diameter_in), None)
-
-        st.warning("⚠️ Velocity mismatch.")
-        st.write(f"Required Diameter: **{required_diameter_in:.2f} in**")
-
-        if suggested_size:
-            suggested_diameter_m = suggested_size * 0.0254
-            suggested_area_m2 = math.pi * (suggested_diameter_m ** 2) / 4
-            suggested_velocity = pipe_flow_m3_s / suggested_area_m2
-
-            st.success(f"🔧 Suggested Standard Pipe Size: **{suggested_size} in**")
-            st.write(f"Velocity at {suggested_size} in: **{suggested_velocity:.2f} m/s**")
+        st.header("4. Velocity Check and Suggested Pipe Size")
+        if abs(velocity_m_s - target_velocity) > 0.001:
+            # Calculate required diameter
+            required_diameter_m = math.sqrt((4 * pipe_flow_m3_s) / (math.pi * target_velocity))
+            required_diameter_in = required_diameter_m / 0.0254
+    
+            # Round up to standard size
+            suggested_size = next((size for size in standard_pipe_sizes if size >= required_diameter_in), None)
+    
+            st.warning("⚠️ Velocity mismatch.")
+            st.write(f"Required Diameter: **{required_diameter_in:.2f} in**")
+    
+            if suggested_size:
+                suggested_diameter_m = suggested_size * 0.0254
+                suggested_area_m2 = math.pi * (suggested_diameter_m ** 2) / 4
+                suggested_velocity = pipe_flow_m3_s / suggested_area_m2
+    
+                st.success(f"🔧 Suggested Standard Pipe Size: **{suggested_size} in**")
+                st.write(f"Velocity at {suggested_size} in: **{suggested_velocity:.2f} m/s**")
+            else:
+                st.error("❌ No standard pipe size found.")
         else:
-            st.error("❌ No standard pipe size found.")
-    else:
-        st.success("✅ Calculated velocity matches target velocity.")
+            st.success("✅ Calculated velocity matches target velocity.")
+
 
 elif mode == "Calculate Flowrate (from pipe diameter)":
     st.header("2. Pipe Diameter Input")
