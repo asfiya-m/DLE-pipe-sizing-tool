@@ -12,10 +12,9 @@ st.title("🔁 DLE Pipe Sizing & Flowrate Calculator")
 st.markdown("""
 ### 💡 What This Application Does
 For Direct Lithium Extraction (DLE) systems, this tool helps to calculate:
-- Pipe diameter based on bed volume and flowrate
-- Velocity checks against target values
+- Pipe diameter based on bed volume and flowrate & perform velocity check against target values
 - Flowrate based on a selected pipe diameter
-- Header sizing for multiple columns
+- Header pipe diameter for multiple columns
 
 Use the dropdown above to choose your task and get started!
 """)
@@ -25,7 +24,7 @@ Use the dropdown above to choose your task and get started!
 mode = st.selectbox("Choose calculation mode:", [
     "Calculate Pipe Diameter (from flowrate)",
     "Calculate Flowrate (from pipe diameter)",
-    "Calculate Header Size (from flowrate and number of columns)"
+    "Calculate Header Diameter (from flowrate and number of columns)"
 ])
 
 # Column dimensions input with unit selection
@@ -66,6 +65,9 @@ if mode == "Calculate Pipe Diameter (from flowrate)":
     # Step 3: Diameter using rule of thumb
     diameter_in = math.sqrt(pipe_flow_gpm / 20)
     st.write(f" **Result:** Calculated Pipe Diameter for the flowrate {pipe_flowrate_bvhr:.2f} BV/hr: **{diameter_in:.2f} in**")
+    #Step 3.1: Standard pipe diameter
+    adjacent_standard_size = next((size for size in standard_pipe_sizes if size >= diameter_in), None)
+    st.success(f"Standard Pipe diameter: **{adjacent_standard_size} in**")
     
     # Step 4: Calculate velocity
     #diameter_m = diameter_in * 0.0254
